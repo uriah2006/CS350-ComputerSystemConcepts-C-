@@ -18,11 +18,11 @@ integer.
 void displayBits(unsigned value)
 {
 	unsigned c, displayMask;
-	
+	displayMask = 1 << 15;
 	
 	printf("%u = ", value);
 	for (c = 1; c <= 16; c++) {
-		displayMask = 1 << 15;
+		
 		putchar(value & displayMask ? '1' : '0');
 		value <<= 1;
 		if (c % 8 == 0){
