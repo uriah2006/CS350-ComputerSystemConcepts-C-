@@ -13,45 +13,34 @@ You may assume that both files are text files, and that both files can be opened
 */
 #include <stdio.h>
 void modify_file2(FILE*, FILE*);
-main(int argc, int *argv[])
-{
-FILE *i
-nFilePtr, *outFilePtr;
-int c;
-if (argc != 3)
-printf("Usage: copy infile outfile
-\
-n");
-else
-if ((inFilePtr = fopen(argv[1], "r")) != NULL)
-if ((outFilePtr = fopen(argv[2], "w")) != NULL)
-modify_file2(inFilePtr, outFilePtr);
-else
-printf("File
-\
-"%s
-\
-" could not be opened
-\
-n", argv[2]);
-else
-printf("File
-\
-"%s
-\
-" could not be opened
-\
-n", argv[1]);
-return 0;
+main(int argc, int *argv[]){
+	FILE *inFilePtr, *outFilePtr;
+	int c;
+	if (argc != 3){
+		printf("Usage: copy infile output\n");
+	}
+	else
+	if ((inFilePtr = fopen(argv[1], "r")) != NULL){
+		if ((outFilePtr = fopen(argv[2], "w")) != NULL){
+			modify_file2(inFilePtr, outFilePtr);
+		}
+		else{
+			printf("File\"%s\" could not be opened\n",argv[2]);
+		}
+	}
+	else{
+		printf("File \"%s\" could not be opened\n",argv[1]);
+	}
+	return 0;
 }
+
 void modify_file2(FILE *inPtr, FILE *outPtr)
 {
-int c;
-if ((c = fgetc(inPtr)) !
-= EOF)
-{modify_file2 (inPtr, outPtr);
-fputc(c, outPtr);
-}
+	int c;
+	if ((c=fgetc(inPtr))!=EOF){
+		modify_file2 (inPtr, outPtr);
+		fputc(c, outPtr);
+	}
 }
 /*
 The file pointed by inFilePtr contains only the following line of text:
