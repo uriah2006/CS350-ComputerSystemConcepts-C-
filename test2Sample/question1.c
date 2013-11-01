@@ -15,18 +15,29 @@ integers (the function below is tailored for 2 - byte - 16 bit unsigned integers
 HINT: Correct solution requires minimal code changes. You may not ask user to type in the size of an unsigned
 integer.
 */
-void dispalyBits(unsigned value){
+void displayBits(unsigned value);
+
+int main()
+{
+  displayBits((unsigned)11);
+  return 0;
+}
+
+void displayBits(unsigned value){
 	unsigned c, displayMask;
-	displayMask= 1 << 15
+	//displayMask= 1 << 15;
+	displayMask= 1 << (sizeof(unsigned)*8-1);
 	
 	printf("%u = ",value);
 	
-	for (c = 1;c <= 16;c++){
-		putchar(value & displayMask ? '1' : '0')
+	//for (c = 1;c <= 16;c++){
+	for (c = 1;c <= sizeof(unsigned)*8;c++){
+		putchar(value & displayMask ? '1' : '0');
 		value <<= 1;
 		if (c % 8 == 0){
 			putchar(' ');
 		}	
 	}
 	putchar('\n');
+	return 0;
 }

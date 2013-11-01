@@ -17,3 +17,18 @@ Example:
 %multiply 8 3 2
 %48
 */
+#include <stdio.h>
+ int main (int argc, int *argv[]) {
+	int i=0;
+	int r=1;
+	if (argc<2){
+		printf("ERROR: no numbers entered");
+	}
+	else{
+		for (i=1; i< argc; i++) {
+			r = r * (atoi(argv[i]));
+		}
+	}
+	printf("%d\n",r);	
+	return 0;
+}

@@ -24,9 +24,11 @@ main (){
 	union number val;
 	val.x=5;
 	printf("%d\n", val.x);
-	printf("%d\n", val.y);
+	//printf("%d\n", val.y);
+	printf("%f\n", val.y);
 	val.y=100.5;
-	printf("%d\n", val.y);
+	//printf("%d\n", val.y);
+	printf("%f\n", val.y);
 	printf("%s\n", val.s);
 	scanf("%s",val.s);/* Assume user enters string ‘something’*/
 	printf("%s\n", val.s);
@@ -35,9 +37,10 @@ main (){
 /*
 Please show what is printed out by each printf() statement in the program above and explain it shortly.
 output
-5               //line 25 sets vals "x" value to 5
-2147483646      //vals "y" value has not been assigned yet
-2147483637      //although vals "y" value has been assigned 
+5               //vals "x" contain the value 5
+0.00000000      //vals "y" value has not been assigned yet
+100.5000000     //vals "y" contain the value 100.5
 				//nothing was outputted because nothing is in vals "s" value
-something       //'something' was typed in line 31
+something       //'something' was typed in
 something       //vals "s" value 'something' was outputted 
+*/
