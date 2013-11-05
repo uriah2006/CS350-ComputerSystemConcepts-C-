@@ -25,16 +25,65 @@ you will receive full points, regardless of the solution you choose).
 */
 
 struct treeNode {
-	struct treeNode *leftPtr;
 	int data;
-	struct treeNode *
-	rightPtr;
+	struct treeNode *leftPtr;
+	struct treeNode *rightPtr;
 };
 
 typedef struct treeNode TREENODE;
 typedef TREENODE *TREENODEPTR;
+ 
 
-int search(
-	TREENODEPTR
-	tree_ptr, int n)
-{
+int recursive(TREENODEPTR tree_ptr, int find);	
+int iterative(TREENODEPTR tree_ptr, int find);
+
+int main (){
+	TREENODEPTR rootPtr;
+
+	insertNode(&rootPtr, 24);
+	insertNode(&rootPtr, 12);
+	insertNode(&rootPtr, 44);
+	insertNode(&rootPtr, 8);
+	insertNode(&rootPtr, 16);
+	insertNode(&rootPtr, 29);
+	insertNode(&rootPtr, 80);
+	insertNode(&rootPtr, 3);
+	insertNode(&rootPtr, 9);
+	insertNode(&rootPtr, 18);
+	insertNode(&rootPtr, 56);
+	insertNode(&rootPtr, 89);
+	
+	//decorations 
+	int find;	
+	
+	
+	//grab values
+	printf("what value do want to trace:");
+	scanf("%d",&find);
+	
+	//recursive
+	
+	int recursive(&rootPtr, find);
+	
+	//iterative
+	int iterative(&rootPtr, find);
+	return 0;	
+}
+int recursive(TREENODEPTR tree_ptr, int find){
+	return 0;
+}
+int iterative(TREENODEPTR tree_ptr, int find){
+	int n = tree_ptr->data;
+	while (n!=find){
+		n = tree_ptr -> data;
+		printf("%d",n);
+		if (find > n){
+		tree_ptr = tree_ptr-> rightPtr;
+		}
+		else {
+		tree_ptr = tree_ptr-> leftPtr;
+		}
+	}
+	
+	return n;
+}

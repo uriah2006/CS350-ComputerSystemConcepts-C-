@@ -20,14 +20,14 @@ union number{
 	float y;
 	char s[10];
 };
-main (){
+int main (){
 	union number val;
 	val.x=5;
 	printf("%d\n", val.x);
-	//printf("%d\n", val.y);
+	//printf("%d\n", val.y); // not a decimal
 	printf("%f\n", val.y);
 	val.y=100.5;
-	//printf("%d\n", val.y);
+	//printf("%d\n", val.y);// not a decimal
 	printf("%f\n", val.y);
 	printf("%s\n", val.s);
 	scanf("%s",val.s);/* Assume user enters string ‘something’*/

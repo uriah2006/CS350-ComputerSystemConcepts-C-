@@ -39,5 +39,4 @@ void displayBits(unsigned value){
 		}	
 	}
 	putchar('\n');
-	return 0;
 }
