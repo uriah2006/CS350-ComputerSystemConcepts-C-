@@ -6,15 +6,15 @@
 /*read me !!!!
 main is at the end 
 
-this program reads a maze in from a txt file 
+this program reads a maze in from a text file 
 **must have**
-	1 on the oustide boarder must only have 2 zeros no more no less
+	1 on the outside boarder must only have 2 zeros no more no less
 	2 maze must use 0 for open space and 1 for wall
 	3 you must know how big the maze is 
 
 */
 /*read in start location (a,b) and size (x,y)
-determins what side of the map the start location is on
+determines what side of the map the start location is on
 and returns the direction it needs to be facing
 returns a char (n||s||e||w)
 */
@@ -24,7 +24,7 @@ char enter (int a,int b,int x,int y){
 	else if (b==0){return 'e';}
 	else if (b==y-1){return 'w';}
 }
-/*reads in curent location (x,y) and the direction (dir)
+/*reads in current location (x,y) and the direction (dir)
 move one step in the direction the man is facing 
 returns nothing **over wrights x or y**
 */
@@ -116,7 +116,7 @@ int wallStright(char array[200][200],int x,int y,char dir){
 	}	
 }
 /*reads in the map(array), your location on the map (x,y), and the direction you are heading (dir)
-it will look one step in front of you depending on your direction and see if a bread crum (x)
+it will look one step in front of you depending on your direction and see if a bread crumb (x)
  returns 1 if safe 0 if not
 */
 int breadCrumStright(char array[200][200],int x,int y,char dir){
@@ -182,7 +182,7 @@ int wallOnlyRight(char array[200][200],int x,int y,char dir){
 	}
 }
 /*reads in the map(array), your location on the map (x,y), and the direction you are heading (dir)
-this looks to see if there is a bread crum to your right
+this looks to see if there is a bread crumb to your right
 returns 1 if there is and 0 if not  
 */
 int breadCrumOnlyRight(char array[200][200],int x,int y,char dir){
@@ -254,7 +254,7 @@ int openRight(char array[200][200],int x,int y,char dir){
 /*reads in the map (array), the start locations (a,b), and the end locations (c,d)
 1 looks to see if it has made it to the start or the end
 2 makes current location a x 
-3 it looks for a bread crum or a wall on the right and if there is a opening stright
+3 it looks for a bread crumb or a wall on the right and if there is a opening straight
 4 if not it will see it there is only a wall to the right if so it turns left
 5 if there is not a wall it will turn right
 no return
@@ -316,7 +316,7 @@ void traverse (char array[200][200],int a,int b,int c,int d, char dir){
 		}
 	}
 }
-/* reads in the map (array), the start (a,b), the end (c,d), and the acual sixe (x,y)
+/* reads in the map (array), the start (a,b), the end (c,d), and the actual size (x,y)
 this will start from the top right corner of the map and work its way counter clockwise
 to find the the start and end locations 
 no return *but* reassigns start (a,b) and end (c,d)
@@ -381,7 +381,7 @@ void startEnd(char array[200][200],int *a,int *b,int *c,int *d, int x, int y ){
 	}
 	return;
 }
-/* reads in the map (array) and the acual sixe (x,y)
+/* reads in the map (array) and the actual size (x,y)
 this uses a nested for loop to print out want is in each location in the 2 d map
 no return *but* wrights to screen
 */
@@ -399,21 +399,21 @@ printMaze(char array[200][200],int x,int y){
 	return;
 }
 main(){
-	//decloration
+	//declaration
 	char array[M][N]={0};
 	FILE *fptr;
 	char c1;														//your char
 	char file_name[20];												//name of file
 	char dir;														//direction
-	int i,j;														//itorator
+	int i,j;														//iterator
 	int x,y;							 							//map size
 	int a,b=0;														//start location
 	int c,d=0;														//end location
-	// decloration end
+	// declaration end
 	//getting data
 	printf("how many rows in your map\n");							// ask for the hight of the map
 	scanf("%d",&x);
-	printf("how many columes in your map\n");						// ask for the width of the map 
+	printf("how many columns in your map\n");						// ask for the width of the map 
 	scanf("%d",&y);
 	printf("Type in the name of the file containing the Field\n");	// ask for the file with the maze
 	scanf("%s",file_name);
