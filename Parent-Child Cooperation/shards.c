@@ -15,10 +15,7 @@ int main(){
 	scanf("%s",file_name);
 	
 	toArray1D(array,file_name);
-	for (i=0; i<M;i++){
-		printf("%d %d \n",i,array[i]);
-		
-	}
+	
 
 }
 void toArray1D(int array[M],char file_name[30]){
@@ -27,7 +24,6 @@ void toArray1D(int array[M],char file_name[30]){
 	int i = 0;
 	
 	fscanf (fptr, "%d", &num);    
-
 	while (!feof (fptr)){  
 		array[i]=num;
 		i++;
