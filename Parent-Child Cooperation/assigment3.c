@@ -25,8 +25,11 @@ int main(){
 	//
 	
 	
+	int * recursiveProcessTree(int array[M]){
+
 	
-return 0;
+	
+	return 0;
 }
 
 void toArray1D(int array[M],char file_name[30]){
@@ -53,28 +56,33 @@ int * recursiveProcessTree(int array[M]){
 	// if you need to recurs
     if (sizeof(array)>100){
 		
-		//fork
+		forkRight=fork();
 		
 		if (forkRight==0){
 			printf("failed to right fork")
-			return -1;
+			exit(-1);
 		}
 		
-		recursiveProcessTreeMergeSort(int array[M]);
+		recursiveProcessTree(int array[M]);
 		
-		//fork
+		wait(NULL);
 		
+		
+		forkLeft=fork();
 		if (forkLeft==0){
 			printf("failed to left fork")
-			return -1;
+			exit(-1);
 		}
 		
-		recursiveProcessTreeMergeSort(int array[M]);
+		recursiveProcessTree(int array[M]);
+		
+		wait(NULL);
 	}
     // time to sort and return
-    if (0 == no)
-        return 1;
+    else{
+	// TODO
+	//sort(array)
+	}
+        
 
-    // linear recursive call
-    return no * Factorial(no - 1);
 }
