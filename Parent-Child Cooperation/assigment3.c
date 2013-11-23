@@ -51,11 +51,26 @@ int * recursiveProcessTree(int array[M]){
 	//decoration
 	pid_t forkRight;
 	pid_t forkLeft;
+	int left[sizeof(array)/2], right[sizeof(array)/2]; 
+	memcpy(left, array, sizeof(array)/2 * sizeof(int)); 
+	memcpy(right, &array[sizeof(array)/2], sizeof(array)/2 * sizeof(int)); 
 	
   	
 	// if you need to recurs
     if (sizeof(array)>100){
 		
+		//left side
+		forkLeft=fork();
+		if (forkLeft==0){
+			printf("failed to left fork")
+			exit(-1);
+		}
+		
+		recursiveProcessTree(int left);
+		
+		wait(NULL);
+		
+		//right side
 		forkRight=fork();
 		
 		if (forkRight==0){
@@ -63,18 +78,7 @@ int * recursiveProcessTree(int array[M]){
 			exit(-1);
 		}
 		
-		recursiveProcessTree(int array[M]);
-		
-		wait(NULL);
-		
-		
-		forkLeft=fork();
-		if (forkLeft==0){
-			printf("failed to left fork")
-			exit(-1);
-		}
-		
-		recursiveProcessTree(int array[M]);
+		recursiveProcessTree(int right);
 		
 		wait(NULL);
 	}
