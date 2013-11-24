@@ -6,9 +6,10 @@ cs 350 10/18/2013
 #include <sys/types.h>
 #include <unistd.h>
 #define  M 800
+#define ARRAY_SIZE( array ) sizeof( array ) / sizeof( array[0] )
 
-void toArray1D(int array[800],char file_name[30]);
-int * recursiveProcessTree(int array[M]);
+void toArray1D(int array[M],char file_name[30]);
+int * recursiveProcessTree(int array[M],int size);
 int main(){
 	//decoration	
 	char file_name[30];							//file name
@@ -17,16 +18,20 @@ int main(){
 	
 	//get data
 	printf("Type in the name of the file containing the text:");
-	scanf("%s",file_name,);
+	scanf("%s",file_name);
 	
 	//
+	
 	toArray1D(array,file_name);
 
-	//
+	alarm(5);
+	recursiveProcessTree(array,(sizeof(array)/4));
 	
+		
+	for (i=0;i<sizeof(array)/4;i++){
+		printf ("%d \n",array[i]);
+	}
 	
-	int * recursiveProcessTree(int array[M]){
-
 	
 	
 	return 0;
@@ -46,47 +51,51 @@ void toArray1D(int array[M],char file_name[30]){
 	fclose (fptr);        
 }
 
-int * recursiveProcessTree(int array[M]){
-
+int * recursiveProcessTree(int array[M],int size){
 	//decoration
-	pid_t forkRight;
-	pid_t forkLeft;
-	int left[sizeof(array)/2], right[sizeof(array)/2]; 
-	memcpy(left, array, sizeof(array)/2 * sizeof(int)); 
-	memcpy(right, &array[sizeof(array)/2], sizeof(array)/2 * sizeof(int)); 
+	int i=0, j=0, k=0;												//i j and k are used for sorting
+	int left[size/2], right[size/2]; 
+	memcpy(left, array, size/2); 
+	memcpy(right, &array[size/2], size); 
+	pid_t forkRight, forkLeft;
 	
-  	
+	
 	// if you need to recurs
-    if (sizeof(array)>100){
-		
+    if (size/2>100){
 		//left side
 		forkLeft=fork();
-		if (forkLeft==0){
-			printf("failed to left fork")
+		if (forkLeft == -1){
+			printf("failed to left fork");
 			exit(-1);
 		}
-		
-		recursiveProcessTree(int left);
-		
+		recursiveProcessTree(left,sizeof(left)/4);
 		wait(NULL);
+		
 		
 		//right side
 		forkRight=fork();
-		
-		if (forkRight==0){
-			printf("failed to right fork")
+		if (forkRight == -1){
+			printf("failed to right fork");
 			exit(-1);
 		}
-		
-		recursiveProcessTree(int right);
-		
+		recursiveProcessTree(right,sizeof(right)/4);
 		wait(NULL);
 	}
+	
+	
     // time to sort and return
-    else{
 	// TODO
-	//sort(array)
+	//sort(array);
+    while(k<size){
+		if(left[i] < right[j]){
+			array[k] = left[i];
+			i++;
+		}
+		else{
+			array[k] = right[j];
+			j++;
+		}
+		k++;
 	}
-        
-
+	return array;
 }
