@@ -5,6 +5,7 @@ cs 350 10/18/2013
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <errno.h>
 #define  M 800
 #define ARRAY_SIZE( array ) sizeof( array ) / sizeof( array[0] )
 
@@ -14,7 +15,7 @@ int main(){
 	//decoration	
 	char file_name[30];							//file name
 	int array[M]={0};
-	int i;
+	int i=0;
 	
 	//get data
 	printf("Type in the name of the file containing the text:");
@@ -27,11 +28,12 @@ int main(){
 	alarm(5);
 	recursiveProcessTree(array,(sizeof(array)/4));
 	
-		
-	for (i=0;i<sizeof(array)/4;i++){
+	i++;
+	printf ("%d \n",i);
+	/*for (i=0;i<sizeof(array)/4;i++){
 		printf ("%d \n",array[i]);
 	}
-	
+	*/
 	
 	
 	return 0;
@@ -57,32 +59,39 @@ int * recursiveProcessTree(int array[M],int size){
 	int left[size/2], right[size/2]; 
 	memcpy(left, array, size/2); 
 	memcpy(right, &array[size/2], size); 
-	pid_t forkRight, forkLeft;
+	pid_t child;
 	
 	
 	// if you need to recurs
-    if (size/2>100){
-		//left side
-		forkLeft=fork();
-		if (forkLeft == -1){
-			printf("failed to left fork");
+    if (size>100){
+	
+		//fork it!!
+		child=fork();
+		if (child < 0){
+			printf("failed to fork");
 			exit(-1);
 		}
-		recursiveProcessTree(left,sizeof(left)/4);
-		wait(NULL);
 		
 		
-		//right side
-		forkRight=fork();
-		if (forkRight == -1){
-			printf("failed to right fork");
-			exit(-1);
+		
+		//child go left
+		if (child==0){
+			recursiveProcessTree(left,sizeof(left)/4);
 		}
-		recursiveProcessTree(right,sizeof(right)/4);
-		wait(NULL);
+		//parent go right
+		else{
+			wait(NULL);
+			recursiveProcessTree(right,sizeof(right)/4);
+		}
+		
+		/*trying to join every thing back up **************************************
+		while (child = waitpid(-1, NULL, 0)) {
+			if (errno == ECHILD) {
+				break;
+			}
+		}
+		*/
 	}
-	
-	
     // time to sort and return
 	// TODO
 	//sort(array);
@@ -99,3 +108,27 @@ int * recursiveProcessTree(int array[M],int size){
 	}
 	return array;
 }
+
+/*
+pid_t child_pid;
+   int i;
+
+   child_pid=fork();
+   if (child_pid<0)  
+    { printf("Failed to fork\n"); exit(-1); } 
+
+   if (child_pid==0) //child code  
+    for (i=0; i<5; i++)
+           printf("i=%d, pid=%ld\n",i,(long)getpid());        
+   else {//parent code
+     wait(NULL);
+    for (i=5; i<10; i++)
+           printf("i=%d, pid=%ld\n",i,(long)getpid());        
+   }
+
+   //child & parent
+   printf("Process %ld, parent %ld \n",(long)getpid(),(long)getppid());
+
+   return 0;
+}
+*/
